@@ -21,7 +21,7 @@ class FlagsNode(template.Node):
         user = User.objects.get(pk=user_id)
 
         flags_of_user = user.flag_set.all()
-        flags = Flag.objects.all()
+        flags = Flag.objects.order_by('name')
 
         userflags = []
         for flag in flags:

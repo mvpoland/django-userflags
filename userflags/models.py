@@ -17,6 +17,10 @@ class Flag(models.Model):
     def __unicode__(self):
         return self.name
 
+    @property
+    def humanized(self):
+        return self.name.replace(u'_', u' ').title()
+
     def add_user(self, user):
         if not self.has_user(user):
             try:

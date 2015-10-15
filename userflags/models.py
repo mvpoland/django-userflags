@@ -1,6 +1,7 @@
 from django.db import models
 
-from django.contrib.auth.models import User
+from django.conf import settings
+from django.contrib.auth import get_user_model
 
 
 class FlagMananager(models.Manager):
@@ -9,7 +10,7 @@ class FlagMananager(models.Manager):
 
 
 class Flag(models.Model):
-    users = models.ManyToManyField(User, blank=True)
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
     name = models.CharField(max_length=255)
 
     objects = FlagMananager()
@@ -37,6 +38,7 @@ class Flag(models.Model):
             self.save()
 
     def has_user(self, user):
+        User = get_user_model()
         try:
             self.users.get(id=user.id)
         except User.DoesNotExist:

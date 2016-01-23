@@ -1,7 +1,7 @@
 import re
 
 from django import template
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.template.defaultfilters import stringfilter
 from django.utils.safestring import mark_safe
 
@@ -17,6 +17,7 @@ class FlagsNode(template.Node):
         self.var_name = var_name
 
     def render(self, context):
+        User = get_user_model()
         user_id = self.user_id.resolve(context)
         user = User.objects.get(pk=user_id)
 

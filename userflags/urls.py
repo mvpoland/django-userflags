@@ -1,4 +1,4 @@
-from django.conf.urls import *
+from django.conf.urls import url
 
 from userflags.views import *
 
@@ -7,7 +7,15 @@ from userflags.views import *
 
 # The urlconf below is just an example
 
-urlpatterns = patterns('',
-    url(r'^link/(?P<user_id>[0-9]+)/(?P<flag_id>[0-9]+)/$', link, name='userflags_link'),
-    url(r'^unlink/(?P<user_id>[0-9]+)/(?P<flag_id>[0-9]+)/$', unlink, name='userflags_unlink'),
-)
+urlpatterns = [
+    url(
+        r'^link/(?P<user_id>[0-9]+)/(?P<flag_id>[0-9]+)/$',
+        link,
+        name='userflags_link'
+    ),
+    url(
+        r'^unlink/(?P<user_id>[0-9]+)/(?P<flag_id>[0-9]+)/$',
+        unlink,
+        name='userflags_unlink'
+    ),
+]

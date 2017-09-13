@@ -11,6 +11,9 @@ bin
 develop-eggs
 .installed.cfg
 
+# IDE
+.idea/
+
 # Installer logs
 pip-log.txt
 

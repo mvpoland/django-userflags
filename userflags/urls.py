@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from userflags.views import *
+from userflags.views import link, unlink
 
 # Because you probably want to lock down these kind of views, it is better to decorate the views and
 # copy paste this urlconf where appropriate...

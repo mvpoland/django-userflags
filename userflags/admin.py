@@ -8,4 +8,5 @@ class FlagAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ['name', 'users__username']
 
+
 admin.site.register(Flag, FlagAdmin)

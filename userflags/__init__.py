@@ -1,11 +1,1 @@
-VERSION = (1, 2, 0)
-
-
-def get_version():
-    if len(VERSION) > 3 and VERSION[3] not in ('final', ''):
-        return '%s.%s.%s %s' % (VERSION[0], VERSION[1], VERSION[2], VERSION[3])
-    else:
-        return '%s.%s.%s' % (VERSION[0], VERSION[1], VERSION[2])
-
-
-__version__ = get_version()
+__version__ = "1.3.0"

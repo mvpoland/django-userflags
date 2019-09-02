@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.contrib.auth import get_user_model
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
@@ -8,7 +10,7 @@ from userflags.models import Flag
 def _redirect_when_possible(request):
     if 'HTTP_REFERER' in request.META:
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
-    return HttpResponse(u'OK')
+    return HttpResponse('OK')
 
 
 def link(request, user_id, flag_id):

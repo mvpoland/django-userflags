@@ -1,9 +1,8 @@
+from __future__ import unicode_literals
 import re
 
 from django import template
 from django.contrib.auth import get_user_model
-from django.template.defaultfilters import stringfilter
-from django.utils.safestring import mark_safe
 
 from userflags.models import Flag
 
@@ -38,12 +37,13 @@ def get_flags_for_user(parser, token):
         # Splitting by None == splitting by spaces.
         tag_name, arg = token.contents.split(None, 1)
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires arguments" % token.contents.split()[0]
+        raise template.TemplateSyntaxError("{} tag requires arguments".format(repr(token.contents.split()[0])))
     m = re.search(r'(.*?) as (\w+)', arg)
     if not m:
-        raise template.TemplateSyntaxError, "%r tag had invalid arguments" % tag_name
+        raise template.TemplateSyntaxError("{} tag had invalid arguments".format(repr(tag_name)))
     user_id, var_name = m.groups()
     return FlagsNode(user_id, var_name)
+
 
 register.tag('get_flags_for_user', get_flags_for_user)
 
@@ -66,13 +66,14 @@ def get_flag(parser, token):
         # Splitting by None == splitting by spaces.
         tag_name, arg = token.contents.split(None, 1)
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires arguments" % token.contents.split()[0]
+        raise template.TemplateSyntaxError("{} tag requires arguments".format(repr(token.contents.split()[0])))
     m = re.search(r'(.*?) as (\w+)', arg)
     if not m:
-        raise template.TemplateSyntaxError, "%r tag had invalid arguments" % tag_name
+        raise template.TemplateSyntaxError("{} tag had invalid arguments".format(repr(tag_name)))
     flag_name, var_name = m.groups()
     if not (flag_name[0] == flag_name[-1] and flag_name[0] in ('"', "'")):
-        raise template.TemplateSyntaxError, "%r tag's argument should be in quotes" % tag_name
+        raise template.TemplateSyntaxError("{} tag's argument should be in quotes".format(repr(tag_name)))
     return FlagNode(flag_name[1:-1], var_name)
+
 
 register.tag('get_flag', get_flag)
